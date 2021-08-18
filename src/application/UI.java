@@ -66,7 +66,7 @@ public class UI {
 		}
 		
 		System.out.println();
-		System.out.println("Game status: " + gameStatus);
+		System.out.println("Game status: " + ANSIColorConstants.ANSI_RED + gameStatus + ANSIColorConstants.ANSI_RESET);
 		
 	}
 	
