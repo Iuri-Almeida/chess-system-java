@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import chess.ChessConstants;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -14,7 +15,6 @@ import chess.Color;
 public class UI {
 	
 	// https://stackoverflow.com/questions/2979383/java-clear-the-console
-	
 	public static void clearScreen() {  
 	    System.out.print("\033[H\033[2J");
 	    System.out.flush();
@@ -39,6 +39,8 @@ public class UI {
 	
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
 		
+		String gameStatus = ChessConstants.NO_CHECK;
+		
 		printBoard(chessMatch.getPieces());
 		
 		System.out.println();
@@ -46,10 +48,25 @@ public class UI {
 		
 		System.out.println();
 		System.out.println("Turn: " + chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+		
+		if (!chessMatch.getCheckMate()) {
+			
+			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+			if (chessMatch.getCheck()) gameStatus = ChessConstants.CHECK;
+			
+		} else {
+			
+			gameStatus = ChessConstants.CHECKMATE;
+			
+			Color player = chessMatch.getCurrentPlayer();
+			
+			System.out.println("Winner: " + ((player == Color.BLACK) ? ANSIColorConstants.ANSI_YELLOW : ANSIColorConstants.ANSI_WHITE)
+					+ player + ANSIColorConstants.ANSI_RESET);
+			
+		}
 		
 		System.out.println();
-		System.out.println("Game status: " + ((chessMatch.getCheck()) ? "CHECK!" : "NO CHECK!"));
+		System.out.println("Game status: " + gameStatus);
 		
 	}
 	
@@ -60,7 +77,7 @@ public class UI {
 		
 		for (int i = 0; i < rows; i++) {
 			
-			System.out.print((rows - i) + " ");
+			System.out.print(ANSIColorConstants.ANSI_GREEN + (rows - i) + " " + ANSIColorConstants.ANSI_RESET);
 			
 			for (int j = 0; j < columns; j++) {
 				
@@ -72,7 +89,7 @@ public class UI {
 			
 		}
 		
-		System.out.println("  a b c d e f g h");
+		System.out.println(ANSIColorConstants.ANSI_GREEN +  "  a b c d e f g h" + ANSIColorConstants.ANSI_RESET);
 		
 	}
 	
@@ -83,7 +100,7 @@ public class UI {
 		
 		for (int i = 0; i < rows; i++) {
 			
-			System.out.print((rows - i) + " ");
+			System.out.print(ANSIColorConstants.ANSI_GREEN + (rows - i) + " " + ANSIColorConstants.ANSI_RESET);
 			
 			for (int j = 0; j < columns; j++) {
 				
@@ -95,7 +112,7 @@ public class UI {
 			
 		}
 		
-		System.out.println("  a b c d e f g h");
+		System.out.println(ANSIColorConstants.ANSI_GREEN +  "  a b c d e f g h" + ANSIColorConstants.ANSI_RESET);
 		
 	}
 	
