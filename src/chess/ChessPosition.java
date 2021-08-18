@@ -35,7 +35,7 @@ public class ChessPosition {
 	public static ChessPosition fromPosition(Position position) {
 		
 		int row = ChessConstants.ROWS - position.getRow();
-		char column = (char) (ChessConstants.FIRST_COLUMN - position.getColumn());
+		char column = (char) (ChessConstants.FIRST_COLUMN + position.getColumn());
 		
 		return new ChessPosition(column, row);
 		
