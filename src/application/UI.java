@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-import chess.ChessConstants;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
@@ -39,7 +38,7 @@ public class UI {
 	
 	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
 		
-		String gameStatus = ChessConstants.NO_CHECK;
+		String gameStatus = ProgramConstants.NO_CHECK;
 		
 		printBoard(chessMatch.getPieces());
 		
@@ -52,21 +51,21 @@ public class UI {
 		if (!chessMatch.getCheckMate()) {
 			
 			System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
-			if (chessMatch.getCheck()) gameStatus = ChessConstants.CHECK;
+			if (chessMatch.getCheck()) gameStatus = ProgramConstants.CHECK;
 			
 		} else {
 			
-			gameStatus = ChessConstants.CHECKMATE;
+			gameStatus = ProgramConstants.CHECKMATE;
 			
 			Color player = chessMatch.getCurrentPlayer();
 			
-			System.out.println("Winner: " + ((player == Color.BLACK) ? ANSIColorConstants.ANSI_YELLOW : ANSIColorConstants.ANSI_WHITE)
-					+ player + ANSIColorConstants.ANSI_RESET);
+			System.out.println("Winner: " + ((player == Color.BLACK) ? ProgramConstants.BLACK_PIECE_COLOR : ProgramConstants.WHITE_PIECE_COLOR)
+					+ player + ProgramConstants.RESET_COLOR);
 			
 		}
 		
 		System.out.println();
-		System.out.println("Game status: " + ANSIColorConstants.ANSI_RED + gameStatus + ANSIColorConstants.ANSI_RESET);
+		System.out.println("Game status: " + ProgramConstants.GAME_STATUS_COLOR + gameStatus + ProgramConstants.RESET_COLOR);
 		
 	}
 	
@@ -77,7 +76,7 @@ public class UI {
 		
 		for (int i = 0; i < rows; i++) {
 			
-			System.out.print(ANSIColorConstants.ANSI_GREEN + (rows - i) + " " + ANSIColorConstants.ANSI_RESET);
+			System.out.print(ProgramConstants.INDICATORS_COLOR + (rows - i) + " " + ProgramConstants.RESET_COLOR);
 			
 			for (int j = 0; j < columns; j++) {
 				
@@ -89,7 +88,7 @@ public class UI {
 			
 		}
 		
-		System.out.println(ANSIColorConstants.ANSI_GREEN +  "  a b c d e f g h" + ANSIColorConstants.ANSI_RESET);
+		System.out.println(ProgramConstants.INDICATORS_COLOR +  "  a b c d e f g h" + ProgramConstants.RESET_COLOR);
 		
 	}
 	
@@ -100,7 +99,7 @@ public class UI {
 		
 		for (int i = 0; i < rows; i++) {
 			
-			System.out.print(ANSIColorConstants.ANSI_GREEN + (rows - i) + " " + ANSIColorConstants.ANSI_RESET);
+			System.out.print(ProgramConstants.INDICATORS_COLOR + (rows - i) + " " + ProgramConstants.RESET_COLOR);
 			
 			for (int j = 0; j < columns; j++) {
 				
@@ -112,19 +111,19 @@ public class UI {
 			
 		}
 		
-		System.out.println(ANSIColorConstants.ANSI_GREEN +  "  a b c d e f g h" + ANSIColorConstants.ANSI_RESET);
+		System.out.println(ProgramConstants.INDICATORS_COLOR +  "  a b c d e f g h" + ProgramConstants.RESET_COLOR);
 		
 	}
 	
 	private static void printPiece(ChessPiece piece, boolean background) {
 		
-		if (background) System.out.print(ANSIColorConstants.ANSI_BLUE_BACKGROUND);
+		if (background) System.out.print(ProgramConstants.BACKGROUND_COLOR);
 		
-		if (piece == null) System.out.print("-" + ANSIColorConstants.ANSI_RESET);
+		if (piece == null) System.out.print("-" + ProgramConstants.RESET_COLOR);
 		else {
 			
-			if (piece.getColor() == Color.WHITE) System.out.print(ANSIColorConstants.ANSI_WHITE + piece + ANSIColorConstants.ANSI_RESET);
-			else System.out.print(ANSIColorConstants.ANSI_YELLOW + piece + ANSIColorConstants.ANSI_RESET);
+			if (piece.getColor() == Color.WHITE) System.out.print(ProgramConstants.WHITE_PIECE_COLOR + piece + ProgramConstants.RESET_COLOR);
+			else System.out.print(ProgramConstants.BLACK_PIECE_COLOR + piece + ProgramConstants.RESET_COLOR);
 			
 		}
 		
@@ -138,8 +137,8 @@ public class UI {
 		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.BLACK).collect(Collectors.toList());
 		
 		System.out.println("Captured pieces:");
-		System.out.println(ANSIColorConstants.ANSI_WHITE + "White: " + Arrays.toString(white.toArray()) + ANSIColorConstants.ANSI_RESET);
-		System.out.println(ANSIColorConstants.ANSI_YELLOW + "Black: " + Arrays.toString(black.toArray()) + ANSIColorConstants.ANSI_RESET);
+		System.out.println(ProgramConstants.WHITE_PIECE_COLOR + "White: " + Arrays.toString(white.toArray()) + ProgramConstants.RESET_COLOR);
+		System.out.println(ProgramConstants.BLACK_PIECE_COLOR + "Black: " + Arrays.toString(black.toArray()) + ProgramConstants.RESET_COLOR);
 		
 	}
 	

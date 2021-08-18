@@ -1,5 +1,6 @@
 package chess;
 
+import application.ProgramConstants;
 import boardgame.Position;
 
 public class ChessPosition {
@@ -9,7 +10,7 @@ public class ChessPosition {
 	
 	public ChessPosition(char column, int row) {
 		
-		if (column < ChessConstants.FIRST_COLUMN || column > ChessConstants.LAST_COLUMN || row < 1 || row > ChessConstants.ROWS)
+		if (column < ProgramConstants.FIRST_COLUMN || column > ProgramConstants.LAST_COLUMN || row < 1 || row > ProgramConstants.ROWS)
 			throw new ChessException("Error instantiating ChessPosition. Valid values are from a1 to h8.");
 		
 		this.row = row;
@@ -26,16 +27,16 @@ public class ChessPosition {
 	
 	public Position toPosition() {
 		
-		int row = ChessConstants.ROWS - this.row;
-		int column = this.column - ChessConstants.FIRST_COLUMN;
+		int row = ProgramConstants.ROWS - this.row;
+		int column = this.column - ProgramConstants.FIRST_COLUMN;
 		
 		return new Position(row, column);
 	}
 	
 	public static ChessPosition fromPosition(Position position) {
 		
-		int row = ChessConstants.ROWS - position.getRow();
-		char column = (char) (ChessConstants.FIRST_COLUMN + position.getColumn());
+		int row = ProgramConstants.ROWS - position.getRow();
+		char column = (char) (ProgramConstants.FIRST_COLUMN + position.getColumn());
 		
 		return new ChessPosition(column, row);
 		
